@@ -1,0 +1,17 @@
+{
+    "display": {
+        "title": "[Cheesemaking Ver 1.0]",
+        "description": "Cheesemaking installed!",
+        "icon": {
+            "item": "milk_bucket"
+        },
+        "announce_to_chat": false,
+        "show_toast": false
+    },
+    "parent": "global:devonsdesk",
+    "criteria": {
+        "trigger": {
+            "trigger": "minecraft:tick"
+        }
+    }
+}

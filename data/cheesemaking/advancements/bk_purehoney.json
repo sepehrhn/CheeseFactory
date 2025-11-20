@@ -1,0 +1,32 @@
+{
+    "display": {
+        "title": {
+            "text": "purehoney"
+        },
+        "description": {
+            "text": "bonus effects from purified honey"
+        },
+        "icon": {
+            "item": "minecraft:air"
+        },
+        "frame": "task",
+        "show_toast": false,
+        "announce_to_chat": false,
+        "hidden": true,
+        "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+    },
+    "criteria": {
+        "eatsalve": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "item": "minecraft:honey_bottle",
+                    "nbt": "{pure:1b}"
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "beekeeping:honey_food/pure_honey"
+    }
+}

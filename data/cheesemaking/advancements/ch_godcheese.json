@@ -1,0 +1,32 @@
+{
+    "display": {
+        "title": {
+            "text": "godcheese"
+        },
+        "description": {
+            "text": "bonus effects from god cheese"
+        },
+        "icon": {
+            "item": "minecraft:air"
+        },
+        "frame": "task",
+        "show_toast": false,
+        "announce_to_chat": false,
+        "hidden": true,
+        "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+    },
+    "criteria": {
+        "eatsalve": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "item": "minecraft:pumpkin_pie",
+                    "nbt": "{godcheese:1b}"
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "cheesemaking:effects/god_effects"
+    }
+}
