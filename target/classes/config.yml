@@ -1,0 +1,70 @@
+# Default configuration for CheeseFactory
+config_version: 3
+
+# Note on custom_id:
+# - If custom_id.type is set to another plugin (e.g. nexo, craftengine), CheeseFactory will keep that plugin's
+#   item name, lore, and appearance. The name/lore entries in this file only apply to minecraft items or when
+#   falling back to a vanilla material because the external item could not be created.
+# - custom_model_data is per-item: set it inside each item's section here (for ingredients) or inside cheese.yml
+#   (for cheeses). If you omit it or set it to 0/negative, that item will not use custom model data.
+
+bacteria:
+  # NOTE:
+  #  - Bacteria block drops are NOT controlled by this config.
+  #  - Install RoseLoot and configure a BLOCK loot table to drop this bacteria item
+  #    (for example by running 'cf give bacteria 1' or by dropping an item matching this definition).
+  #  - See RoseLoot wiki: https://wiki.rosewooddev.io/RoseLoot/overview/
+  custom_id:
+    type: minecraft
+    item: SLIME_BALL
+  minecraft_item:
+    name: "<gold><b>Mesophilic Bacteria</b></gold>"
+    lore:
+      - "<yellow>Produces ATP from lactose.</yellow>"
+
+curd:
+  custom_id:
+    type: minecraft
+    item: BREAD
+  minecraft_item:
+    name: "<gold><b>Curd</b></gold>"
+    lore:
+      - "<yellow>Fresh cheese curd.</yellow>"
+
+fermentation:
+  time_ticks: 9600                # 8 minutes by default
+  tick_interval: 20               # how often to tick barrels (in ticks). Increased to 20 (1s) for performance and better effect timing.
+  effects:
+    particles:
+      enabled: true
+      # Available types: DUST (allows custom colors), COMPOSTER, VILLAGER_HAPPY, etc.
+      type: "DUST" 
+      # If type is REDSTONE, these hex colors will be used randomly
+      colors:
+        - "#FFFF00" # Yellow
+        - "#FFD700" # Gold
+      count: 3
+      offset_y: 1.1
+    sounds:
+      enabled: true
+      sound: "BLOCK_BREWING_STAND_BREW"
+      volume: 0.3
+      pitch: 0.5
+      chance: 0.2 # Chance per tick to play sound
+
+inoculated_milk:
+  custom_id:
+    type: minecraft
+    item: MILK_BUCKET
+  minecraft_item:
+    name: "<white>Inoculated Milk</white>"
+    lore: []
+  cooking_time_ticks: 600
+
+cheese_barrel:
+  custom_id:
+    type: minecraft
+    item: BARREL
+  minecraft_item:
+    name: "<gold>Cheese Barrel</gold>"
+    lore: []

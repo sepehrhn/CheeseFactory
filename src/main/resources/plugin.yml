@@ -1,0 +1,45 @@
+name: CheeseFactory
+version: ${project.version}
+main: dev.sepehrhn.cheesefactory.CheeseFactoryPlugin
+api-version: "1.21"
+author: sepehrhn
+description: Artisanal cheesemaking plugin inspired by the original datapack.
+website: https://github.com/sepehrhn/CheeseFactory
+
+softdepend:
+  - Nexo
+  - CraftEngine
+  - RoseLoot
+  - TheBrewingProject
+
+commands:
+  cheesefactory:
+    description: CheeseFactory admin commands
+    usage: /<command> reload|give
+    aliases: [cfactory]
+    permission: cheesefactory.admin
+  cf:
+    description: CheeseFactory admin commands
+    usage: /<command> reload|give
+    permission: cheesefactory.admin
+  cheese:
+    description: CheeseFactory admin commands
+    usage: /<command> reload|give
+    permission: cheesefactory.admin
+
+permissions:
+  cheesefactory.admin:
+    description: Allows managing the CheeseFactory plugin.
+    default: op
+  cheesefactory.give.barrel:
+    description: Allows giving Cheese Barrel items.
+    default: op
+  cheesefactory.give.bacteria:
+    description: Allows giving Bacteria items.
+    default: op
+  cheesefactory.give.curd:
+    description: Allows giving Curd items.
+    default: op
+  cheesefactory.give.inoculated_milk:
+    description: Allows giving Inoculated Milk items.
+    default: op

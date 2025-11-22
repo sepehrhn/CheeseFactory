@@ -1,1 +1,0 @@
-execute as @e[tag=cheese.barrel] at @s if block ~ ~ ~ barrel{Items:[{Slot:0b,id:"minecraft:suspicious_stew",Count:1b,tag:{curd:1b}}]} run particle entity_effect ^0.5 ^0.1 ^0.5 0.580 0.553 0.192 0 0 normal

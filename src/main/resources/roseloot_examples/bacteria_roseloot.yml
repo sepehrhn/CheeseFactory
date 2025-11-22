@@ -1,0 +1,20 @@
+# Example RoseLoot loot table for dropping Mesophilic Bacteria from PODZOL
+# Place this file in: plugins/RoseLoot/loottables/
+# This mimics vanilla flint-from-gravel logic:
+#  - Block must be PODZOL
+#  - No Silk Touch (just like flint won't drop with Silk Touch)
+#  - Fortune scales the drop chance (10% base, 14% Fortune I, 25% Fortune II, 100% Fortune III+)
+type: BLOCK
+overwrite-existing: none
+conditions:
+  - 'block-type:podzol'
+  - '!enchantment:silk_touch'
+  - 'enchantment-chance-table:fortune,10%,14%,25%,100%,100%' # extra 100% to cover Fortune IV+ if present
+pools:
+  main_pool:
+    rolls: 1
+    entries:
+      - items:
+          - type: command
+            value: 'cf give bacteria 1'
+            # Alternative: drop a custom item that matches bacteria.item in config.yml instead of running a command.

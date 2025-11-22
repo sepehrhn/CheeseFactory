@@ -1,0 +1,44 @@
+# Default cheeses for CheeseFactory. You can add or remove cheeses here.
+# Names and lore below apply when custom_id.type is minecraft or when the plugin falls back to a vanilla item.
+# If you point custom_id.type to another plugin (for example nexo or craftengine), the external item's metadata
+# is kept as-is and CheeseFactory only tags the item for its own use.
+# To use a resource pack model for a cheese, add `custom_model_data: <number>` under that cheese. If omitted or <= 0,
+# no custom model data is set for that cheese.
+cheese_version: 1
+
+strange:
+  custom_id:
+    type: minecraft
+    item: ROTTEN_FLESH
+  minecraft_item:
+    name: "<gold><bold>Strange Cheese</bold></gold>"
+    lore:
+      - "<yellow>Definitely safe to eat.</yellow>"
+  weight: 15
+  effects:
+    - "WITHER/10/0"
+    - "HUNGER/10/0"
+
+good:
+  custom_id:
+    type: minecraft
+    item: PUMPKIN_PIE
+  minecraft_item:
+    name: "<gold><bold>Good Cheese</bold></gold>"
+    lore:
+      - "<yellow>Some well made cheese.</yellow>"
+  weight: 80
+  effects: [ ]
+
+luxury:
+  custom_id:
+    type: minecraft
+    item: PUMPKIN_PIE
+  minecraft_item:
+    name: "<light_purple><bold>Luxury Cheese</bold></light_purple>"
+    lore:
+      - "<yellow>Contains palpable flavors.</yellow>"
+  weight: 5
+  effects:
+    - "ABSORPTION/600/1"
+    - "INSTANT_HEALTH/1/1"

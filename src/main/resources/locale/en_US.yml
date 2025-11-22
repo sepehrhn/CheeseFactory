@@ -1,0 +1,47 @@
+# Default messages for CheeseFactory
+locale_version: 1
+command:
+  usage: "<yellow>Usage: /%command% reload | /%command% give barrel [amount] | /%command% give bacteria [amount] | /%command% give curd [amount] | /%command% give inoculated_milk [amount]</yellow>"
+  reload:
+    success: "<green>CheeseFactory reloaded.</green>"
+  no-permission: "<red>You don't have permission to do that.</red>"
+barrel:
+  title: "<gold>Cheese Barrel</gold>"
+  not-registered: "<red>This barrel is not configured for cheesemaking.</red>"
+item:
+  curd:
+    name: "<white>Cheese Curd</white>"
+  inoculated_milk:
+    name: "<white>Inoculated Milk</white>"
+cauldron:
+  needs_heat: "<red>The cauldron needs a heat source underneath!</red>"
+debug:
+  cheese_barrel:
+    enabled: "Cheese barrel debug: <green>ENABLED</green>"
+    disabled: "Cheese barrel debug: <red>DISABLED</red>"
+    player_only: "<red>Players only.</red>"
+    no_target: "<red>No target block in range.</red>"
+    not_barrel: "<yellow>Test: block at <white>%x%,%y%,%z%</white> is <white>%type%</white>, not BARREL.</yellow>"
+    test_converting: "<gray>Test: converting barrel at <white>%x%,%y%,%z%</white> to cheese barrel...</gray>"
+commands:
+  give:
+    barrel:
+      usage: "<red>Usage: /cheesefactory give barrel [amount]</red>"
+      player_only: "<red>This command can only be used by players.</red>"
+      invalid_amount: "<red>Amount must be a positive integer.</red>"
+      success_self: "<green>Gave you <white>%amount%</white> cheese barrel(s).</green>"
+    bacteria:
+      usage: "<red>Usage: /cheesefactory give bacteria [amount]</red>"
+      player_only: "<red>This command can only be used by players.</red>"
+      invalid_amount: "<red>Amount must be a positive integer.</red>"
+      success_self: "<green>Gave you <white>%amount%</white> Bacteria.</green>"
+    curd:
+      usage: "<red>Usage: /cheesefactory give curd [amount]</red>"
+      player_only: "<red>This command can only be used by players.</red>"
+      invalid_amount: "<red>Amount must be a positive integer.</red>"
+      success_self: "<green>Gave you <white>%amount%</white> Curd.</green>"
+    inoculated_milk:
+      usage: "<red>Usage: /cheesefactory give inoculated_milk [amount]</red>"
+      player_only: "<red>This command can only be used by players.</red>"
+      invalid_amount: "<red>Amount must be a positive integer.</red>"
+      success_self: "<green>Gave you <white>%amount%</white> Inoculated Milk.</green>"
