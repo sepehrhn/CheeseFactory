@@ -13,6 +13,7 @@ dev\sepehrhn\cheesefactory\cheese\CheeseDefinition.class
 dev\sepehrhn\cheesefactory\item\CheeseItemManager$ResolvedItem.class
 dev\sepehrhn\cheesefactory\barrel\BarrelItemService$ResolvedItem.class
 dev\sepehrhn\cheesefactory\barrel\BarrelStorage.class
+dev\sepehrhn\cheesefactory\config\ConfigMigrator.class
 dev\sepehrhn\cheesefactory\listener\BarrelSetupListener.class
 dev\sepehrhn\cheesefactory\listener\BarrelGuiListener.class
 dev\sepehrhn\cheesefactory\integration\NexoItemProvider.class

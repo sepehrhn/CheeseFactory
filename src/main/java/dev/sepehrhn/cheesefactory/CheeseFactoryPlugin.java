@@ -12,6 +12,7 @@ import dev.sepehrhn.cheesefactory.listener.CampfireCurdListener;
 import dev.sepehrhn.cheesefactory.listener.InoculatedMilkCraftListener;
 import dev.sepehrhn.cheesefactory.locale.LocaleManager;
 import dev.sepehrhn.cheesefactory.barrel.BarrelItemService;
+import dev.sepehrhn.cheesefactory.config.ConfigMigrator;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -35,10 +36,11 @@ public final class CheeseFactoryPlugin extends JavaPlugin {
     public void onEnable() {
         try {
             saveDefaultConfig();
-            updateYamlResource("config.yml", new File(getDataFolder(), "config.yml"), "config_version");
+            ConfigMigrator migrator = new ConfigMigrator(this);
+            migrator.migrateConfig(new File(getDataFolder(), "config.yml"), getResource("config.yml"), "config_version");
             ensureDefaultLocale();
-            updateYamlResource("locale/en_US.yml", new File(getDataFolder(), "locale/en_US.yml"), "locale_version");
-            updateYamlResource("cheese.yml", new File(getDataFolder(), "cheese.yml"), "cheese_version");
+            migrator.migrateConfig(new File(getDataFolder(), "locale/en_US.yml"), getResource("locale/en_US.yml"), "locale_version");
+            migrator.migrateConfig(new File(getDataFolder(), "cheese.yml"), getResource("cheese.yml"), "cheese_version");
             ensureRoseLootExamples();
             this.localeManager = new LocaleManager(this);
             this.localeManager.reloadLocales();
@@ -97,10 +99,11 @@ public final class CheeseFactoryPlugin extends JavaPlugin {
 
     public void reloadCheeseConfig() {
         saveDefaultConfig();
-        updateYamlResource("config.yml", new File(getDataFolder(), "config.yml"), "config_version");
+        ConfigMigrator migrator = new ConfigMigrator(this);
+        migrator.migrateConfig(new File(getDataFolder(), "config.yml"), getResource("config.yml"), "config_version");
         ensureDefaultLocale();
-        updateYamlResource("locale/en_US.yml", new File(getDataFolder(), "locale/en_US.yml"), "locale_version");
-        updateYamlResource("cheese.yml", new File(getDataFolder(), "cheese.yml"), "cheese_version");
+        migrator.migrateConfig(new File(getDataFolder(), "locale/en_US.yml"), getResource("locale/en_US.yml"), "locale_version");
+        migrator.migrateConfig(new File(getDataFolder(), "cheese.yml"), getResource("cheese.yml"), "cheese_version");
         reloadConfig();
         itemManager.reload();
         cheeseRegistry.reload();
@@ -193,33 +196,4 @@ public final class CheeseFactoryPlugin extends JavaPlugin {
         }
     }
 
-    private void updateYamlResource(String resourcePath, File targetFile, String versionKey) {
-        if (targetFile == null) {
-            return;
-        }
-        if (!targetFile.exists()) {
-            saveResource(resourcePath, false);
-        }
-        var resourceStream = getResource(resourcePath);
-        if (resourceStream == null) {
-            return;
-        }
-        var existing = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(targetFile);
-        var defaults = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new InputStreamReader(resourceStream, StandardCharsets.UTF_8));
-        int existingVersion = existing.getInt(versionKey, 0);
-        int defaultVersion = defaults.getInt(versionKey, 0);
-        if (existingVersion < defaultVersion) {
-            for (String key : defaults.getKeys(true)) {
-                if (!existing.isSet(key)) {
-                    existing.set(key, defaults.get(key));
-                }
-            }
-            existing.set(versionKey, defaultVersion);
-            try {
-                existing.save(targetFile);
-            } catch (IOException e) {
-                getLogger().warning("Failed to update " + targetFile.getName() + ": " + e.getMessage());
-            }
-        }
-    }
 }

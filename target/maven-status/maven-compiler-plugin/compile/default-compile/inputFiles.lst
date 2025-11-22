@@ -11,6 +11,7 @@ D:\Semarina\CheeseFactory\src\main\java\dev\sepehrhn\cheesefactory\integration\C
 D:\Semarina\CheeseFactory\src\main\java\dev\sepehrhn\cheesefactory\listener\CheeseConsumeListener.java
 D:\Semarina\CheeseFactory\src\main\java\dev\sepehrhn\cheesefactory\locale\LocaleManager.java
 D:\Semarina\CheeseFactory\src\main\java\dev\sepehrhn\cheesefactory\command\CheeseFactoryCommand.java
+D:\Semarina\CheeseFactory\src\main\java\dev\sepehrhn\cheesefactory\config\ConfigMigrator.java
 D:\Semarina\CheeseFactory\src\main\java\dev\sepehrhn\cheesefactory\integration\ExternalItemProvider.java
 D:\Semarina\CheeseFactory\src\main\java\dev\sepehrhn\cheesefactory\listener\BarrelSetupListener.java
 D:\Semarina\CheeseFactory\src\main\java\dev\sepehrhn\cheesefactory\barrel\CheeseBarrelManager.java

@@ -1,5 +1,8 @@
 # Default configuration for CheeseFactory
-config_version: 3
+config_version: 4
+
+# Config Migration: Your customizations are preserved when updating!
+# Backups are saved to: plugins/CheeseFactory/config.yml.backup-vX-YYYY-MM-DD-HHmm
 
 # Note on custom_id:
 # - If custom_id.type is set to another plugin (e.g. nexo, craftengine), CheeseFactory will keep that plugin's
@@ -65,6 +68,14 @@ cheese_barrel:
   custom_id:
     type: minecraft
     item: BARREL
+  custom_id_open:
+    type: minecraft
+    item: BARREL
   minecraft_item:
     name: "<gold>Cheese Barrel</gold>"
     lore: []
+  sounds:
+    open: BLOCK_BARREL_OPEN
+    close: BLOCK_BARREL_CLOSE
+    volume: 1.0
+    pitch: 1.0
