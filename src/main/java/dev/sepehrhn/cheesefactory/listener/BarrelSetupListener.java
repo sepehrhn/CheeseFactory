@@ -30,10 +30,7 @@ public class BarrelSetupListener implements Listener {
             return;
         }
         Block placed = event.getBlockPlaced();
-        if (placed.getType() != Material.BARREL) {
-            if (plugin.isCheeseBarrelDebugEnabled()) {
-                logDebug("Placed cheese barrel item but block type is " + placed.getType() + "; registration skipped.");
-            }
+        if (placed.getType().isAir()) {
             return;
         }
         boolean success = barrelManager.registerBarrel(placed);
@@ -49,7 +46,7 @@ public class BarrelSetupListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onBarrelBreak(BlockBreakEvent event) {
         Block block = event.getBlock();
-        if (block.getType() != Material.BARREL) {
+        if (block.getType().isAir()) {
             return;
         }
 

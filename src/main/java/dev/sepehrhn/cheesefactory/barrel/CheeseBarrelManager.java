@@ -125,10 +125,7 @@ public class CheeseBarrelManager {
     }
 
     public boolean registerBarrel(Block block) {
-        if (block.getType() != Material.BARREL) {
-            if (plugin.isCheeseBarrelDebugEnabled()) {
-                plugin.getLogger().info("[CheeseDebug] registerBarrel aborted: target is " + block.getType());
-            }
+        if (block.getType().isAir()) {
             return false;
         }
         Location loc = block.getLocation().toBlockLocation();
@@ -173,7 +170,7 @@ public class CheeseBarrelManager {
         }
 
         Block block = world.getBlockAt(loc);
-        if (block.getType() != Material.BARREL) {
+        if (block.getType().isAir()) {
             dropBarrelItem(loc.clone().add(0.5, 0.5, 0.5));
             dropInventoryContents(state);
             removeState(loc);

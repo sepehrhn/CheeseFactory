@@ -97,7 +97,7 @@ public class CheeseFactoryCommand implements CommandExecutor, TabCompleter {
                     .toList();
         }
         if (args.length == 2 && sender.hasPermission("cheesefactory.admin") && args[0].equalsIgnoreCase("give")) {
-            return List.of("barrel", "bacteria", "curd", "inoculated_milk").stream()
+            return List.of("cheese_barrel", "bacteria", "curd", "inoculated_milk").stream()
                     .filter(opt -> opt.startsWith(args[1].toLowerCase(Locale.ROOT)))
                     .toList();
         }
@@ -111,7 +111,7 @@ public class CheeseFactoryCommand implements CommandExecutor, TabCompleter {
         }
         String target = args[1].toLowerCase(Locale.ROOT);
         switch (target) {
-            case "barrel" -> giveBarrel(sender, args);
+            case "cheese_barrel", "barrel" -> giveBarrel(sender, args);
             case "bacteria" -> giveBacteria(sender, args);
             case "curd" -> giveCurd(sender, args);
             case "inoculated_milk", "inoculatedmilk", "milk" -> giveInoculatedMilk(sender, args);

@@ -26,7 +26,7 @@ public class BarrelGuiListener implements Listener {
             return;
         }
         var block = event.getClickedBlock();
-        if (block == null || block.getType() != Material.BARREL) {
+        if (block == null || block.getType().isAir()) {
             return;
         }
         if (!barrelManager.isRegistered(block)) {
