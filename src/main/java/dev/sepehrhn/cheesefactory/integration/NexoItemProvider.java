@@ -4,6 +4,7 @@ import dev.sepehrhn.cheesefactory.CheeseFactoryPlugin;
 import org.bukkit.inventory.ItemStack;
 
 import com.nexomc.nexo.api.NexoItems;
+import com.nexomc.nexo.api.NexoBlocks;
 
 public class NexoItemProvider implements ExternalItemProvider {
 
@@ -21,5 +22,14 @@ public class NexoItemProvider implements ExternalItemProvider {
             return null;
         }
         return builder.build();
+    }
+
+    @Override
+    public void placeBlock(String itemId, org.bukkit.Location location) {
+        try {
+            NexoBlocks.place(itemId, location);
+        } catch (Exception e) {
+            plugin.getLogger().warning("Failed to place Nexo block '" + itemId + "' at location: " + e.getMessage());
+        }
     }
 }

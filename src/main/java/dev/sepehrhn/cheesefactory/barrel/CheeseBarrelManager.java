@@ -46,6 +46,12 @@ public class CheeseBarrelManager {
     private float soundPitch;
     private double soundChance;
 
+    // Barrel GUI Sounds
+    private Sound barrelOpenSound;
+    private Sound barrelCloseSound;
+    private float barrelSoundVolume;
+    private float barrelSoundPitch;
+
     public CheeseBarrelManager(CheeseFactoryPlugin plugin, CheeseItemManager itemManager, CheeseRegistry cheeseRegistry, BarrelItemService barrelItemService) {
         this.plugin = plugin;
         this.itemManager = itemManager;
@@ -99,6 +105,26 @@ public class CheeseBarrelManager {
         soundVolume = (float) config.getDouble("fermentation.effects.sounds.volume", 0.3);
         soundPitch = (float) config.getDouble("fermentation.effects.sounds.pitch", 0.5);
         soundChance = config.getDouble("fermentation.effects.sounds.chance", 0.2);
+
+        // Load Barrel GUI Sounds
+        String openSoundStr = config.getString("cheese_barrel.sounds.open", "BLOCK_BARREL_OPEN");
+        try {
+            barrelOpenSound = Sound.valueOf(openSoundStr);
+        } catch (IllegalArgumentException e) {
+            plugin.getLogger().warning("Invalid sound '" + openSoundStr + "'; defaulting to BLOCK_BARREL_OPEN.");
+            barrelOpenSound = Sound.BLOCK_BARREL_OPEN;
+        }
+
+        String closeSoundStr = config.getString("cheese_barrel.sounds.close", "BLOCK_BARREL_CLOSE");
+        try {
+            barrelCloseSound = Sound.valueOf(closeSoundStr);
+        } catch (IllegalArgumentException e) {
+            plugin.getLogger().warning("Invalid sound '" + closeSoundStr + "'; defaulting to BLOCK_BARREL_CLOSE.");
+            barrelCloseSound = Sound.BLOCK_BARREL_CLOSE;
+        }
+
+        barrelSoundVolume = (float) config.getDouble("cheese_barrel.sounds.volume", 1.0);
+        barrelSoundPitch = (float) config.getDouble("cheese_barrel.sounds.pitch", 1.0);
         
         // Load saved barrels
         var loaded = storage.load();
@@ -158,7 +184,31 @@ public class CheeseBarrelManager {
     public void openBarrel(Player player, Block block) {
         CheeseBarrelState state = getState(block);
         if (state != null && state.getInventory() != null) {
+            playSound(block.getLocation(), barrelOpenSound);
+            setBarrelOpen(block, true);
             player.openInventory(state.getInventory());
+        }
+    }
+
+    public void closeBarrel(Player player, Block block) {
+        if (block != null && !block.getType().isAir()) {
+            playSound(block.getLocation(), barrelCloseSound);
+            setBarrelOpen(block, false);
+        }
+    }
+
+    private void setBarrelOpen(Block block, boolean open) {
+        if (barrelItemService.isNexoBarrel()) {
+            barrelItemService.placeBarrel(block.getLocation(), open);
+        } else if (block.getBlockData() instanceof org.bukkit.block.data.type.Barrel barrelData) {
+            barrelData.setOpen(open);
+            block.setBlockData(barrelData);
+        }
+    }
+
+    private void playSound(Location location, Sound sound) {
+        if (sound != null && location.getWorld() != null) {
+            location.getWorld().playSound(location, sound, barrelSoundVolume, barrelSoundPitch);
         }
     }
 

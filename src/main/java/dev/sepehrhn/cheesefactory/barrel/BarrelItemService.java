@@ -36,6 +36,7 @@ public class BarrelItemService {
     private String rawName = "<gold>Cheese Barrel</gold>";
     private List<String> rawLore = List.of();
     private CustomIdDefinition customId = DEFAULT_CUSTOM_ID;
+    private CustomIdDefinition customIdOpen = DEFAULT_CUSTOM_ID;
 
     public BarrelItemService(CheeseFactoryPlugin plugin, CheeseKeys keys) {
         this.plugin = plugin;
@@ -54,6 +55,7 @@ public class BarrelItemService {
         rawName = resolveName(cfg, ROOT + "minecraft_item.name", ROOT + "name", "<gold>Cheese Barrel</gold>");
         rawLore = resolveLore(cfg, ROOT + "minecraft_item.lore", ROOT + "lore");
         customId = parseCustomId(cfg, ROOT + "custom_id", log);
+        customIdOpen = parseCustomId(cfg, ROOT + "custom_id_open", log);
 
         var legacy = plugin.getDataFolder().toPath().resolve("cheese_barrel.yml").toFile();
         if (legacy.exists()) {
@@ -170,5 +172,20 @@ public class BarrelItemService {
             return Collections.emptyList();
         }
         return lore;
+    }
+
+    public void placeBarrel(org.bukkit.Location location, boolean open) {
+        CustomIdDefinition id = open ? customIdOpen : customId;
+        String type = normalizeType(id);
+        String itemId = id.item();
+
+        if ("nexo".equals(type) && hasNexo && nexoProvider != null && itemId != null) {
+            nexoProvider.placeBlock(itemId, location);
+        }
+        // For vanilla barrels, block state is handled in CheeseBarrelManager
+    }
+
+    public boolean isNexoBarrel() {
+        return "nexo".equals(normalizeType(customId));
     }
 }

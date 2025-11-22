@@ -36,4 +36,24 @@ public class BarrelGuiListener implements Listener {
         event.setCancelled(true);
         barrelManager.openBarrel(event.getPlayer(), block);
     }
+
+    @EventHandler(ignoreCancelled = false, priority = EventPriority.MONITOR)
+    public void onBarrelClose(org.bukkit.event.inventory.InventoryCloseEvent event) {
+        // Check if this is a cheese barrel inventory
+        if (!(event.getInventory().getHolder() instanceof dev.sepehrhn.cheesefactory.barrel.CheeseBarrelState)) {
+            return;
+        }
+
+        // Get the block location from the barrel state
+        var state = (dev.sepehrhn.cheesefactory.barrel.CheeseBarrelState) event.getInventory().getHolder();
+        var location = state.getLocation();
+        if (location == null || location.getWorld() == null) {
+            return;
+        }
+
+        var block = location.getWorld().getBlockAt(location);
+        if (event.getPlayer() instanceof org.bukkit.entity.Player player) {
+            barrelManager.closeBarrel(player, block);
+        }
+    }
 }
