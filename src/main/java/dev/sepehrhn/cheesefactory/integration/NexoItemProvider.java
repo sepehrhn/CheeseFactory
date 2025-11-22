@@ -3,6 +3,8 @@ package dev.sepehrhn.cheesefactory.integration;
 import dev.sepehrhn.cheesefactory.CheeseFactoryPlugin;
 import org.bukkit.inventory.ItemStack;
 
+import com.nexomc.nexo.api.NexoItems;
+
 public class NexoItemProvider implements ExternalItemProvider {
 
     private final CheeseFactoryPlugin plugin;
@@ -13,8 +15,11 @@ public class NexoItemProvider implements ExternalItemProvider {
 
     @Override
     public ItemStack createItem(String itemId) {
-        // TODO Integrate with Nexo API to fetch an item by id.
-        plugin.getLogger().fine("Nexo integration placeholder for item '" + itemId + "'.");
-        return null;
+        var builder = NexoItems.itemFromId(itemId);
+        if (builder == null) {
+            plugin.getLogger().warning("Nexo item '" + itemId + "' not found or not loaded yet.");
+            return null;
+        }
+        return builder.build();
     }
 }
