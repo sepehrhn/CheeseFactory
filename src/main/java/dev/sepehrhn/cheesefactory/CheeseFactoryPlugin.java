@@ -33,27 +33,33 @@ public final class CheeseFactoryPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-        updateYamlResource("config.yml", new File(getDataFolder(), "config.yml"), "config_version");
-        ensureDefaultLocale();
-        updateYamlResource("locale/en_US.yml", new File(getDataFolder(), "locale/en_US.yml"), "locale_version");
-        updateYamlResource("cheese.yml", new File(getDataFolder(), "cheese.yml"), "cheese_version");
-        ensureRoseLootExamples();
-        this.localeManager = new LocaleManager(this);
-        this.localeManager.reloadLocales();
+        try {
+            saveDefaultConfig();
+            updateYamlResource("config.yml", new File(getDataFolder(), "config.yml"), "config_version");
+            ensureDefaultLocale();
+            updateYamlResource("locale/en_US.yml", new File(getDataFolder(), "locale/en_US.yml"), "locale_version");
+            updateYamlResource("cheese.yml", new File(getDataFolder(), "cheese.yml"), "cheese_version");
+            ensureRoseLootExamples();
+            this.localeManager = new LocaleManager(this);
+            this.localeManager.reloadLocales();
 
-        this.itemManager = new CheeseItemManager(this);
-        this.cheeseRegistry = new CheeseRegistry(this, itemManager.keys(), itemManager);
-        this.cheeseRegistry.reload();
-        this.barrelItemService = new BarrelItemService(this, itemManager.keys());
-        this.barrelItemService.reload();
-        this.barrelManager = new CheeseBarrelManager(this, itemManager, cheeseRegistry, barrelItemService);
+            this.itemManager = new CheeseItemManager(this);
+            this.cheeseRegistry = new CheeseRegistry(this, itemManager.keys(), itemManager);
+            this.cheeseRegistry.reload();
+            this.barrelItemService = new BarrelItemService(this, itemManager.keys());
+            this.barrelItemService.reload();
+            this.barrelManager = new CheeseBarrelManager(this, itemManager, cheeseRegistry, barrelItemService);
 
-        registerListeners();
-        registerCommands();
-        announceIntegrations();
+            registerListeners();
+            registerCommands();
+            announceIntegrations();
 
-        getLogger().info("CheeseFactory enabled.");
+            getLogger().info("CheeseFactory enabled.");
+        } catch (Throwable t) {
+            getLogger().severe("Failed to enable CheeseFactory: " + t.getMessage());
+            t.printStackTrace();
+            throw t; // Re-throw to ensure it still disables, but we get the log first
+        }
     }
 
     @Override
