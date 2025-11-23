@@ -45,3 +45,7 @@ commands:
       player_only: "<red>This command can only be used by players.</red>"
       invalid_amount: "<red>Amount must be a positive integer.</red>"
       success_self: "<green>Gave you <white>%amount%</white> Inoculated Milk.</green>"
+inspect:
+  player_only: "<red>This command can only be used by players.</red>"
+  no_target: "<red>You must be looking at a block!</red>"
+  not_barrel: "<red>That's not a cheese barrel!</red>"

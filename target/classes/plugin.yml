@@ -43,3 +43,6 @@ permissions:
   cheesefactory.give.inoculated_milk:
     description: Allows giving Inoculated Milk items.
     default: op
+  cheesefactory.inspect:
+    description: Allows inspecting cheese barrels.
+    default: true
