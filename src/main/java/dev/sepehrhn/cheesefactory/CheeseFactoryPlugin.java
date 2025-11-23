@@ -128,10 +128,6 @@ public final class CheeseFactoryPlugin extends JavaPlugin {
         } else {
             getLogger().warning("[CheeseFactory] RoseLoot is not installed. Bacteria will not drop from blocks; use /cf give bacteria instead.");
         }
-        var tbp = getServer().getPluginManager().getPlugin("TheBrewingProject");
-        if (tbp != null) {
-            getLogger().info("TheBrewingProject detected. CheeseFactory will isolate its cauldron interactions for curd creation.");
-        }
     }
 
     private void registerCommands() {

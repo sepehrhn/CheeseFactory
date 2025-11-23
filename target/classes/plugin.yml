@@ -10,7 +10,6 @@ softdepend:
   - Nexo
   - CraftEngine
   - RoseLoot
-  - TheBrewingProject
 
 commands:
   cheesefactory:

@@ -38,7 +38,6 @@ A sophisticated Minecraft plugin that adds a realistic cheese-making system with
 ### 🔌 Integrations
 - **Nexo**: Custom item models and block states
 - **RoseLoot**: Bacteria drops from blocks
-- **TheBrewingProject**: Isolated cauldron interactions
 - **CraftEngine**: Alternative custom item provider
 
 ## Installation
@@ -101,7 +100,7 @@ cheese_barrel:
 
 - **Server**: Paper/Purpur 1.20+
 - **Java**: 17 or higher
-- **Optional**: Nexo, RoseLoot, CraftEngine, TheBrewingProject
+- **Optional**: Nexo, RoseLoot, CraftEngine
 
 ## Building from Source
 

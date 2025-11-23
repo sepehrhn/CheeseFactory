@@ -1,5 +1,5 @@
 # Default configuration for CheeseFactory
-config_version: 4
+config_version: 5
 
 # Config Migration: Your customizations are preserved when updating!
 # Backups are saved to: plugins/CheeseFactory/config.yml.backup-vX-YYYY-MM-DD-HHmm
@@ -11,11 +11,40 @@ config_version: 4
 # - custom_model_data is per-item: set it inside each item's section here (for ingredients) or inside cheese.yml
 #   (for cheeses). If you omit it or set it to 0/negative, that item will not use custom model data.
 
+# ======================================================================================
+# FERMENTATION SETTINGS
+# ======================================================================================
+# Configure the fermentation process timing and visual/audio effects
+
+fermentation:
+  time_ticks: 9600                # 8 minutes by default (20 ticks = 1 second)
+  tick_interval: 20               # How often to tick barrels (in ticks). 20 = once per second
+  effects:
+    particles:
+      enabled: true
+      type: "DUST"                # Available: DUST (custom colors), COMPOSTER, VILLAGER_HAPPY, etc.
+      colors:                     # Colors used randomly (hex format)
+        - "#FFFF00"               # Yellow
+        - "#FFD700"               # Gold
+      count: 3
+      offset_y: 1.1
+    sounds:
+      enabled: true
+      sound: "BLOCK_BREWING_STAND_BREW"
+      volume: 0.3
+      pitch: 0.5
+      chance: 0.2                 # Chance per tick to play sound (0.0 - 1.0)
+
+# ======================================================================================
+# ITEM DEFINITIONS
+# ======================================================================================
+# Configure all custom items used in the cheese-making process
+
 bacteria:
   # NOTE:
   #  - Bacteria block drops are NOT controlled by this config.
   #  - Install RoseLoot and configure a BLOCK loot table to drop this bacteria item
-  #    (for example by running 'cf give bacteria 1' or by dropping an item matching this definition).
+  #    (example: run '/cf give bacteria 1' to get the item for testing)
   #  - See RoseLoot wiki: https://wiki.rosewooddev.io/RoseLoot/overview/
   custom_id:
     type: minecraft
@@ -24,6 +53,15 @@ bacteria:
     name: "<gold><b>Mesophilic Bacteria</b></gold>"
     lore:
       - "<yellow>Produces ATP from lactose.</yellow>"
+
+inoculated_milk:
+  custom_id:
+    type: minecraft
+    item: MILK_BUCKET
+  minecraft_item:
+    name: "<white>Inoculated Milk</white>"
+    lore: []
+  cooking_time_ticks: 600         # Time to cook on campfire (30 seconds)
 
 curd:
   custom_id:
@@ -34,41 +72,11 @@ curd:
     lore:
       - "<yellow>Fresh cheese curd.</yellow>"
 
-fermentation:
-  time_ticks: 9600                # 8 minutes by default
-  tick_interval: 20               # how often to tick barrels (in ticks). Increased to 20 (1s) for performance and better effect timing.
-  effects:
-    particles:
-      enabled: true
-      # Available types: DUST (allows custom colors), COMPOSTER, VILLAGER_HAPPY, etc.
-      type: "DUST" 
-      # If type is REDSTONE, these hex colors will be used randomly
-      colors:
-        - "#FFFF00" # Yellow
-        - "#FFD700" # Gold
-      count: 3
-      offset_y: 1.1
-    sounds:
-      enabled: true
-      sound: "BLOCK_BREWING_STAND_BREW"
-      volume: 0.3
-      pitch: 0.5
-      chance: 0.2 # Chance per tick to play sound
-
-inoculated_milk:
-  custom_id:
-    type: minecraft
-    item: MILK_BUCKET
-  minecraft_item:
-    name: "<white>Inoculated Milk</white>"
-    lore: []
-  cooking_time_ticks: 600
-
 cheese_barrel:
   custom_id:
     type: minecraft
     item: BARREL
-  custom_id_open:
+  custom_id_open:                 # Block shown when barrel GUI is open
     type: minecraft
     item: BARREL
   minecraft_item:
