@@ -30,7 +30,6 @@ public final class CheeseFactoryPlugin extends JavaPlugin {
     private CheeseBarrelManager barrelManager;
     private BarrelItemService barrelItemService;
     private LocaleManager localeManager;
-    private boolean cheeseBarrelDebugEnabled = false;
 
     @Override
     public void onEnable() {
@@ -88,14 +87,7 @@ public final class CheeseFactoryPlugin extends JavaPlugin {
         return localeManager;
     }
 
-    public boolean isCheeseBarrelDebugEnabled() {
-        return cheeseBarrelDebugEnabled;
-    }
 
-    public boolean toggleCheeseBarrelDebug() {
-        cheeseBarrelDebugEnabled = !cheeseBarrelDebugEnabled;
-        return cheeseBarrelDebugEnabled;
-    }
 
     public void reloadCheeseConfig() {
         saveDefaultConfig();

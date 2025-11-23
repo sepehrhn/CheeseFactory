@@ -34,12 +34,10 @@ public class BarrelSetupListener implements Listener {
             return;
         }
         boolean success = barrelManager.registerBarrel(placed);
-        if (plugin.isCheeseBarrelDebugEnabled()) {
-            if (success) {
-                logDebug("Registered placed cheese barrel at " + formatBlock(placed) + ".");
-            } else {
-                logDebug("Cheese barrel at " + formatBlock(placed) + " was already registered.");
-            }
+        if (success) {
+            logDebug("Registered placed cheese barrel at " + formatBlock(placed) + ".");
+        } else {
+            logDebug("Cheese barrel at " + formatBlock(placed) + " was already registered.");
         }
     }
 
@@ -53,9 +51,7 @@ public class BarrelSetupListener implements Listener {
         if (barrelManager.isRegistered(block)) {
             event.setDropItems(false);
             barrelManager.removeBarrel(block, true);
-            if (plugin.isCheeseBarrelDebugEnabled()) {
-                logDebug("Removed cheese barrel at " + formatBlock(block) + " and dropped configured barrel item.");
-            }
+            logDebug("Removed cheese barrel at " + formatBlock(block) + " and dropped configured barrel item.");
         }
     }
 

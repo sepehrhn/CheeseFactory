@@ -88,7 +88,6 @@ cheese_barrel:
 | `/cf give inoculated_milk [amount]` | `cheesefactory.give.inoculated_milk` | Give inoculated milk |
 | `/cf inspect` | `cheesefactory.inspect` | Inspect barrel contents |
 | `/cf reload` | `cheesefactory.admin` | Reload configuration |
-| `/cf debugbarrel` | `cheesefactory.admin` | Toggle barrel debug |
 
 ## Permissions
 

@@ -37,48 +37,6 @@ public class CheeseFactoryCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(locale.component(sender, "command.reload.success"));
                 return true;
             }
-            if (args[0].equalsIgnoreCase("debugbarrel")) {
-                if (!sender.hasPermission("cheesefactory.admin")) {
-                    sender.sendMessage(locale.component(sender, "command.no-permission"));
-                    return true;
-                }
-                boolean enabled = plugin.toggleCheeseBarrelDebug();
-                String key = enabled ? "debug.cheese_barrel.enabled" : "debug.cheese_barrel.disabled";
-                sender.sendMessage(locale.component(sender, key));
-                return true;
-            }
-            if (args[0].equalsIgnoreCase("testbarrel")) {
-                if (!sender.hasPermission("cheesefactory.admin")) {
-                    sender.sendMessage(locale.component(sender, "command.no-permission"));
-                    return true;
-                }
-                if (!(sender instanceof Player player)) {
-                    sender.sendMessage(locale.component(sender, "debug.cheese_barrel.player_only"));
-                    return true;
-                }
-                var target = player.getTargetBlockExact(5);
-                if (target == null) {
-                    sender.sendMessage(locale.component(sender, "debug.cheese_barrel.no_target"));
-                    return true;
-                }
-                var loc = target.getLocation();
-                Map<String, String> placeholders = new HashMap<>();
-                placeholders.put("x", String.valueOf(loc.getBlockX()));
-                placeholders.put("y", String.valueOf(loc.getBlockY()));
-                placeholders.put("z", String.valueOf(loc.getBlockZ()));
-                placeholders.put("type", target.getType().name());
-                if (target.getType() != org.bukkit.Material.BARREL) {
-                    sender.sendMessage(locale.component(sender, "debug.cheese_barrel.not_barrel", placeholders));
-                    return true;
-                }
-                sender.sendMessage(locale.component(sender, "debug.cheese_barrel.test_converting", placeholders));
-                boolean success = plugin.getBarrelManager().registerBarrel(target);
-                if (plugin.isCheeseBarrelDebugEnabled()) {
-                    plugin.getLogger().info("[CheeseDebug] Test command invoked conversion for barrel at ("
-                            + loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ() + "). Success=" + success);
-                }
-                return true;
-            }
             if (args[0].equalsIgnoreCase("give")) {
                 return handleGive(sender, args);
             }
@@ -95,7 +53,7 @@ public class CheeseFactoryCommand implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (args.length == 1 && sender.hasPermission("cheesefactory.admin")) {
             String arg = args[0].toLowerCase(Locale.ROOT);
-            return List.of("reload", "debugbarrel", "testbarrel", "give", "inspect").stream()
+            return List.of("reload", "give", "inspect").stream()
                     .filter(opt -> opt.startsWith(arg))
                     .toList();
         }

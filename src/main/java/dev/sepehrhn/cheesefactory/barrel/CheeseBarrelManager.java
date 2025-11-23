@@ -155,10 +155,8 @@ public class CheeseBarrelManager {
             return false;
         }
         Location loc = block.getLocation().toBlockLocation();
-        if (plugin.isCheeseBarrelDebugEnabled()) {
-            plugin.getLogger().info("[CheeseDebug] registerBarrel called for " + block.getType() + " at ("
-                    + loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ() + ")");
-        }
+        plugin.getLogger().info("[CheeseDebug] registerBarrel called for " + block.getType() + " at ("
+                + loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ() + ")");
         boolean isNew = !barrels.containsKey(loc.toBlockLocation());
         CheeseBarrelState state = barrels.computeIfAbsent(loc, this::createState);
         scheduleBarrelTask(loc, state);
