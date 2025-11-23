@@ -6,7 +6,7 @@
 
     <groupId>dev.sepehrhn</groupId>
     <artifactId>cheesefactory</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <name>CheeseFactory</name>
     <description>Artisanal cheesemaking plugin inspired by the original datapack.</description>
     <packaging>jar</packaging>
